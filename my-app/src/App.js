@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Globals from "./Globals";
 import Title from './Components/Title';
 import Checkbox from './Components/Checkbox';
+import formatStatus from './Helpers/formatStatus';
 
 function App() {
   const companiesData = Globals.companies;
@@ -79,7 +80,7 @@ function App() {
               .map((company, i) => (
                 <tr key={i}>
                   <td>{company.id}</td>
-                  <td>{company.status}</td>
+                  <td>{formatStatus(company.status)}</td>
                   <td>{company.name}</td>
                   <td>{company.date}</td>
                 </tr>
@@ -87,6 +88,14 @@ function App() {
           </tbody>
         </table>
       </div>
+
+       {/* list length */}
+       <Title 
+        title={'Cantidad de compañías: ' + companies.filter((company) => 
+            filters.length > 0 ? filters.includes(company.status) : true
+          ).length
+        }
+      />
     </div>
   );
 }
