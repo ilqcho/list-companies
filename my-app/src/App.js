@@ -2,11 +2,13 @@ import "./App.css";
 import React, { useState } from "react";
 import Globals from "./Globals";
 import Title from './Components/Title';
+import Checkbox from './Components/Checkbox';
 
 function App() {
   const companiesData = Globals.companies;
   const [companies, setCompanies] = useState(companiesData);
   const [sort, setSort] = useState(null);
+  const [filters, setFilters] = useState([]);
 
   const sortBy = (element) => {
     if(!sort){ 
@@ -32,10 +34,22 @@ function App() {
     }
   }
 
+  const handleFilters = (data) => {
+    let newFilters = {...filters};
+    newFilters = data;  
+    setFilters(newFilters);
+  }
+
 
   return (
     <div className="App">
 
+      {/* Checkboxes filters */}
+      <Checkbox 
+        handleFilters={data => handleFilters(data)}
+      />
+
+      {/* companies list */}  
       <Title 
         title="Compañías"
       />
@@ -60,7 +74,9 @@ function App() {
             </tr>
           </thead>
           <tbody>
-            {companies.map((company, i) => (
+            {companies.filter((company) => 
+              filters.length > 0 ? filters.includes(company.status) : true)
+              .map((company, i) => (
                 <tr key={i}>
                   <td>{company.id}</td>
                   <td>{company.status}</td>

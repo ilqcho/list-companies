@@ -10,6 +10,23 @@ var Globals = {
         { id: 5, status: "declined", name: "002", date: "02/02/2022" },
         { id: 6, status: "declined", name: "001", date: "02/02/2022" },
     ],
+    status: [
+        {
+            id: 1,
+            description: "Aceptado",
+            value: "accepted",
+        },
+        {
+            id: 2,
+            description: "Declinado",
+            value: "declined",
+        },
+        {
+            id: 3,
+            description: "Pendiente",
+            value: "pending",
+        },
+    ],
 }
 
 
